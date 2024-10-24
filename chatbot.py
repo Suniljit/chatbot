@@ -8,7 +8,18 @@ client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Set a default model
 if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-4o-mini-2024-07-18"
+    st.session_state["openai_model"] = "gpt-4o-mini"
+
+# Available models for selection
+models = ['gpt-4o-mini', 'gpt-4o']
+
+# Sidebar for model selection
+st.sidebar.title('Model Selection')
+selected_model = st.sidebar.radio("Select a LLM model for inference:", models)
+st.session_state["openai_model"] = selected_model
+
+# Display the selected model
+st.write(f"You have selected the following model: {st.session_state['openai_model']}")
 
 # Initialize chat history
 if "messages" not in st.session_state:
